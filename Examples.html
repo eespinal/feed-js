@@ -1,0 +1,76 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+	
+	<head>
+		<title>feed-js | The best standalone javascript template engine :)</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="Content-Language" content="en-us" />
+		<meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
+		<meta name="robots" content="noindex" />
+		<meta name="robots" content="nofollow" />
+		
+		<style>
+			html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, label, input, button, textarea, p, blockquote, th, td {
+				margin: 0;
+				padding: 0;
+			}
+			
+			html, body {
+				height:100%;
+				width:100%;
+			}
+			
+			pre{
+				font-size: 15px;
+				line-height: 25px;
+			}
+			
+			.output{ color: green; font-weight: bold; }
+		</style>
+		
+		<script type="text/javascript" src="feed.js"></script>
+		<script type="text/javascript">
+			var row_template = '<div style="padding: 20px; margin: 50px 50px 0 50px; border-bottom: 1px solid silver; font-family: monospace;">{{output}}</div>';
+			
+			function expose( fn ) {
+				var output = "<pre>" + fn.toString() + "</pre>";
+				
+				output = output.replace( /(\s*)(return)/gi, "\n$1$2" ).replace( /\n/gi, '<br>' );
+				
+				output += '<span class="output"><br>' + fn() + '</span>';
+				
+				document.write( Feed( row_template, { output: output } ) );
+			}
+			
+			function feed_from_json() {
+				var template = 'Hello "{{name}}"!';
+				var json = { name: "World" };
+						
+				return Feed( template, json );
+			}
+			expose( feed_from_json );
+			
+
+			function feed_a_conditional_template() {
+				var template = 'You must select an option [[from the "{{input}}" field]]';
+				var json = { input: "Username" };
+				
+				return Feed( template, json );
+			}
+			expose( feed_a_conditional_template );
+			
+			function feed_a_conditional_template_and_the_source_is_not_found() {
+				var template = 'You must select an option [[from the "{{input}}" field]]';
+				var json = { };
+				
+				return Feed( template, json );
+			}
+			expose( feed_a_conditional_template_and_the_source_is_not_found );
+		</script>
+	</head>
+	
+	<body>
+		
+	</body>
+</html>
