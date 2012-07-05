@@ -19,7 +19,7 @@ Feeding a template with a JSON array.
 var template = "Hello {{name}}";
 var data = [ {name:"foo"}, {name:"var"} ];
 
-Feed( template, data, 'json' );	// "Hello World"
+Feed( template, data, 'json' );	// ["Hello foo", "Hello var"]
 ```
 
 Feeding a template with a JSON header array. In this case the first element of the array is a JSON object and it's properties contain the index at which their values are on the subsequet rows.
