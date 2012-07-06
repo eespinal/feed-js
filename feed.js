@@ -16,7 +16,7 @@
 		var element;
 		
 		var regexp = /{{([a-z\-_]+[0-9]*)}}/ig;
-			
+		
 		var header = array[0];
 		
 		if( is_json || is_json_array ){
@@ -84,7 +84,7 @@
 	}
 	
 	// This method would make the Feed function available at string level prototype
-	Feed.export = function() {
+	Feed.set_prototype = function() {
 		String.prototype.feed = function( source, opt_source_type ) {
 			var template = this;
 			return Feed(template, source, opt_source_type );
